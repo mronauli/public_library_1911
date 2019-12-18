@@ -6,7 +6,6 @@ class Book
     @author_last_name = args[:author_last_name]
     @title = args[:title]
     @publication_date = args[:publication_date]
-    # @author = args.store("#{:author_first_name}" + "#{:author_last_name}")
     @author = args[:author]
     @publication_year = args[:publication_year]
   end

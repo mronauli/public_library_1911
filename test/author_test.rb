@@ -41,7 +41,33 @@ require './lib/author'
 
 class AuthorTest < Minitest::Test
   def test_author_exists
-  charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
-  assert_instance_of Author, charlotte_bronte
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+    assert_instance_of Author, charlotte_bronte
+  end
+
+  def test_author_has_attributes
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+    assert_equal "Charlotte Bronte", charlotte_bronte.name
+  end
+
+  def test_author_starts_off_with_no_books
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+    assert_equal [], charlotte_bronte.books
+  end
+
+  def test_author_can_write_book
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+    jane_eyre = charlotte_bronte.write("Jane Eyre", "October 16, 1847")
+    assert_equal Book, jane_eyre.class
+    assert_equal "Jane Eyre", jane_eyre.title
+  end
+
+  def test_can_add_written_book_into_books_array
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+    jane_eyre = charlotte_bronte.write("Jane Eyre", "October 16, 1847")
+    villette = charlotte_bronte.write("Villette", "1853")
+    charlotte_bronte.add_book(jane_eyre)
+    charlotte_bronte.add_book(villete)
+    assert_equal [jane_eyre, villete], charlotte_bronte.books
   end
 end
